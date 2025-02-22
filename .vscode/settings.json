@@ -5,6 +5,7 @@
 		"codegen",
 		"reshim",
 		"rustc",
+		"sourcescan",
 		"zstd"
 	]
 }

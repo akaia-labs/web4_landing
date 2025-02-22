@@ -1,14 +1,10 @@
 use {
-	near_sdk::{
-		borsh::{BorshDeserialize, BorshSerialize},
-		json_types::Base64VecU8,
-		serde::{Deserialize, Serialize},
-	},
+	near_sdk::{json_types::Base64VecU8, near},
 	std::collections::HashMap,
 };
 
-#[derive(Debug, Deserialize)]
-#[serde(crate = "near_sdk::serde")]
+#[near(serializers = [json])]
+#[derive(Debug)]
 pub struct Web4Request {
 	#[serde(rename = "accountId")]
 	pub account_id: Option<String>,
@@ -20,8 +16,9 @@ pub struct Web4Request {
 	pub preloads:   Option<HashMap<String, Web4Response>>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-#[serde(crate = "near_sdk::serde", untagged)]
+#[near(serializers = [json])]
+#[derive(Debug)]
+#[serde(untagged)]
 pub enum Web4Response {
 	Body {
 		#[serde(rename = "contentType")]

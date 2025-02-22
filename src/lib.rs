@@ -2,27 +2,18 @@ mod common;
 mod routes;
 
 pub use common::*;
-use {
-	near_sdk::{
-		borsh::{BorshDeserialize, BorshSerialize},
-		json_types::Base64VecU8,
-		near_bindgen,
-		serde::{Deserialize, Serialize},
-	},
-	routes::Routes,
-	std::collections::HashMap,
-};
+use {near_sdk::near, routes::Routes};
 
-const ROUTES: Routes = Routes::new();
-
-#[near_bindgen]
-#[derive(Default, BorshDeserialize, BorshSerialize)]
+#[near(contract_state)]
+#[derive(Default)]
 pub struct Contract {}
 
-#[near_bindgen]
+#[near]
 impl Contract {
 	pub fn web4_get(&self, request: Web4Request) -> Web4Response {
-		if let Some(route) = ROUTES.by_path.get(&request.path) {
+		let routes = Routes::new();
+
+		if let Some(route) = routes.by_path.get(&request.path) {
 			Web4Response::Body {
 				content_type: "text/html; charset=UTF-8".to_owned(),
 				body:         route.page.as_bytes().to_owned().into(),
@@ -30,7 +21,7 @@ impl Contract {
 		} else {
 			Web4Response::Body {
 				content_type: "text/html; charset=UTF-8".to_owned(),
-				body:         ROUTES.error_404.page.into_bytes().into(),
+				body:         routes.error_404.page.into_bytes().into(),
 			}
 		}
 	}
