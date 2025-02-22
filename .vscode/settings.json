@@ -4,6 +4,7 @@
 		"clippy",
 		"codegen",
 		"reshim",
-		"rustc"
+		"rustc",
+		"zstd"
 	]
 }
