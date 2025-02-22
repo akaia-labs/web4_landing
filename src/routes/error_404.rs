@@ -1,3 +1,8 @@
 pub fn default() -> String {
-	"<h1>404</h1>".to_string()
+	let content = r#"
+		<h1>404</h1>
+		<h2>Page not found</h2>
+	"#;
+
+	content.to_string()
 }
