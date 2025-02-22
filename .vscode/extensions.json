@@ -1,0 +1,7 @@
+{
+	"recommendations": [
+		"rust-lang.rust-analyzer",
+		"cordx56.rustowl-vscode",
+		"streetsidesoftware.code-spell-checker-cspell-bundled-dictionaries"
+	]
+}
