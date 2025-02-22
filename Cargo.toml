@@ -1,13 +1,13 @@
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [package]
-name = "web4-demo"
+name = "web4_landing"
 version = "0.1.0"
 edition = "2021"
 
 
 [dependencies]
-near-sdk = "4.0.0-pre.7"
+near-sdk = "5.8.1"
 
 
 [lib]
