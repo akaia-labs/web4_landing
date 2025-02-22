@@ -1,7 +1,7 @@
 pub mod error_404;
 pub mod page;
 
-use {page::default as index, std::collections::HashMap};
+use {error_404::main as error_404, page::main as index, std::collections::HashMap};
 
 pub struct Route {
 	pub path: String,
