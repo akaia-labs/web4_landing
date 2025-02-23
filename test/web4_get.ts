@@ -9,7 +9,7 @@ const params = new URLSearchParams({
 });
 
 fetch(
-  `https://rpc.web4.near.page/account/akaia.near/view/web4_get/${
+  `https://rpc.web4.testnet.page/account/web4tester.testnet/view/web4_get/${
     params.toString() ? "?" + params.toString() : ""
   }`,
 )
