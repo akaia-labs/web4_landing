@@ -1,13 +1,12 @@
 :root {
 	height: 100vh;
 	width: 100vw;
-	padding: 0;
-	margin: 0;
 	background: #000000;
 	color: #ffffff;
 }
 
 body {
+	margin: 0;
 	height: 100%;
 	width: 100%;
 }
