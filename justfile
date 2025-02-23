@@ -6,3 +6,6 @@ build:
 
 deploy:
 	(cargo near deploy build-non-reproducible-wasm)
+
+test:
+	(deno --allow-net ./test/web4_get.ts)

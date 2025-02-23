@@ -3,6 +3,7 @@
 		"rust-lang.rust-analyzer",
 		"cordx56.rustowl-vscode",
 		"streetsidesoftware.code-spell-checker-cspell-bundled-dictionaries",
-		"aaron-bond.better-comments"
+		"aaron-bond.better-comments",
+		"denoland.vscode-deno"
 	]
 }
