@@ -1,9 +1,0 @@
-{
-	"request": {
-		"account_id": null,
-		"path": "/",
-		"params": {},
-		"query": {},
-		"preloads": null
-	}
-}
