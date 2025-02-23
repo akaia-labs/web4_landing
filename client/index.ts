@@ -6,7 +6,7 @@ type GetParams = {
   path?: string;
 };
 
-const get = (
+export const get = (
   { network = "testnet", contractAccountId, path = "/" }: GetParams,
 ) => {
   const params = new URLSearchParams({
@@ -19,7 +19,7 @@ const get = (
     }),
   });
 
-  fetch(
+  return fetch(
     `https://rpc.web4.${
       network === "mainnet" ? "near" : network
     }.page/account/${contractAccountId}/view/web4_get?${params.toString()}`,
@@ -27,21 +27,16 @@ const get = (
     .then((response) => response.json())
     .then(({ contentType, body: base64Response }) => {
       if (contentType === "text/html; charset=UTF-8") {
-        const decodedResponse = atob(base64Response);
-
-        console.log(decodedResponse);
+        return atob(base64Response);
       } else {
         throw new Error(`Unsupported content type: ${contentType}`);
       }
     })
     .catch((error) => {
-      console.error("Error:", error);
+      const errorMessage = error instanceof Error
+        ? error.message
+        : String(error);
+
+      return errorMessage;
     });
 };
-
-const main = () => {
-  // TODO: pass inputs from command line
-  get({ contractAccountId: "web4tester.testnet" });
-};
-
-main();
