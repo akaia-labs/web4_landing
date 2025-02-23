@@ -7,5 +7,8 @@ build:
 deploy:
 	(cargo near deploy build-non-reproducible-wasm)
 
-test:
+deploy-test:
+	(cargo near deploy build-non-reproducible-wasm web4tester.testnet without-init-call network-config testnet sign-with-legacy-keychain send)
+
+test: deploy-test
 	(deno --allow-net ./test/web4_get.ts)
