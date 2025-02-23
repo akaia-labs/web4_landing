@@ -18,6 +18,7 @@ impl Contract {
 
 		Web4Response::Body {
 			content_type: "text/html; charset=UTF-8".to_owned(),
+
 			body: navigator
 				.get_route_by_path(&request.path)
 				.page

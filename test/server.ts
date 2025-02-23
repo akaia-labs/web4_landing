@@ -9,7 +9,11 @@ export default {
 			contractAccountId: "akaia.near",
 			path: decodedUrl.pathname,
 		}).then((response) => {
-			return new Response(response);
+			return new Response(response, {
+				headers: {
+					"Content-Type": "text/html",
+				},
+			});
 		});
 	},
 } satisfies Deno.ServeDefaultExport;
