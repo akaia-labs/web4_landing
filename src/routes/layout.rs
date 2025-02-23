@@ -1,4 +1,4 @@
-use crate::PageProps;
+use super::PageProps;
 
 pub fn view(props: PageProps) -> String {
 	let content = format!(
@@ -11,6 +11,7 @@ pub fn view(props: PageProps) -> String {
 					<title>{title}</title>
 					<meta name="description" content="{description}">
 					<meta name="viewport" content="width=device-width, initial-scale=1.0">
+					<link rel="icon" type="image/png" href={favicon_href}>
 
 					<style>
 						{style}
@@ -23,12 +24,13 @@ pub fn view(props: PageProps) -> String {
 			</html>
 		"#,
 		title = format!(
-			"{title} - {subtitle}",
+			"{title}: {subtitle}",
 			title = props.title,
 			subtitle = props.subtitle
 		),
 		description = props.description,
 		style = include_str!("../layout/style.css"),
+		favicon_href = props.favicon_url,
 		body = props.children
 	);
 

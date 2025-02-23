@@ -1,6 +1,14 @@
 pub mod layout;
 
-use crate::{APP_METADATA, PageProps};
+use crate::APP_METADATA;
+
+pub struct PageProps {
+	pub title: String,
+	pub subtitle: String,
+	pub description: String,
+	pub favicon_url: String,
+	pub children: String,
+}
 
 pub struct Route {
 	pub page: String,
@@ -20,6 +28,7 @@ impl PathNavigation for RouteNavigator {
 					title: APP_METADATA.name.to_string(),
 					subtitle: "Demo".to_string(),
 					description: APP_METADATA.description.to_string(),
+					favicon_url: APP_METADATA.favicon_url.to_string(),
 					children: include_str!("index.html").to_string(),
 				}),
 			},
@@ -29,6 +38,7 @@ impl PathNavigation for RouteNavigator {
 					title: APP_METADATA.name.to_string(),
 					subtitle: "Not Found".to_string(),
 					description: "No content corresponds to the requested URL.".to_string(),
+					favicon_url: APP_METADATA.favicon_url.to_string(),
 					children: include_str!("404.html").to_string(),
 				}),
 			},
