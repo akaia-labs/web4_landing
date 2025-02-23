@@ -2,7 +2,10 @@ mod common;
 mod routes;
 
 pub use common::*;
-use {near_sdk::near, routes::Routes};
+use {
+	near_sdk::near,
+	routes::{PathNavigation, RouteNavigator},
+};
 
 #[near(contract_state)]
 #[derive(Default)]
@@ -11,18 +14,16 @@ pub struct Contract {}
 #[near]
 impl Contract {
 	pub fn web4_get(&self, request: Web4Request) -> Web4Response {
-		let routes = Routes::new();
+		let navigator = RouteNavigator::new();
 
-		if let Some(route) = routes.by_path.get(&request.path) {
-			Web4Response::Body {
-				content_type: "text/html; charset=UTF-8".to_owned(),
-				body:         route.page.as_bytes().to_owned().into(),
-			}
-		} else {
-			Web4Response::Body {
-				content_type: "text/html; charset=UTF-8".to_owned(),
-				body:         routes.error_404.page.into_bytes().into(),
-			}
+		Web4Response::Body {
+			content_type: "text/html; charset=UTF-8".to_owned(),
+			body: navigator
+				.get_route_by_path(&request.path)
+				.page
+				.as_bytes()
+				.to_owned()
+				.into(),
 		}
 	}
 }

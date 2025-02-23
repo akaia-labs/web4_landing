@@ -1,6 +1,4 @@
-mod layout;
-
-use std::collections::HashMap;
+pub mod layout;
 
 use crate::{APP_METADATA, PageProps};
 
@@ -8,24 +6,25 @@ pub struct Route {
 	pub page: String,
 }
 
-pub struct Routes {
-	pub by_path: HashMap<String, Route>,
-	pub error_404: Route,
+pub struct RouteNavigator {}
+
+pub trait PathNavigation {
+	fn get_route_by_path(&self, path: &str) -> Route;
 }
 
-impl Routes {
-	pub fn new() -> Routes {
-		Routes {
-			by_path: HashMap::from([("/".to_string(), Route {
+impl PathNavigation for RouteNavigator {
+	fn get_route_by_path(&self, path: &str) -> Route {
+		match path {
+			| "/" => Route {
 				page: layout::view(PageProps {
 					title: APP_METADATA.name.to_string(),
 					subtitle: "Demo".to_string(),
 					description: APP_METADATA.description.to_string(),
 					children: include_str!("index.html").to_string(),
 				}),
-			})]),
+			},
 
-			error_404: Route {
+			| _ => Route {
 				page: layout::view(PageProps {
 					title: APP_METADATA.name.to_string(),
 					subtitle: "Not Found".to_string(),
@@ -34,5 +33,11 @@ impl Routes {
 				}),
 			},
 		}
+	}
+}
+
+impl RouteNavigator {
+	pub fn new() -> Self {
+		Self {}
 	}
 }
